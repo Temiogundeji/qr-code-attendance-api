@@ -13,8 +13,8 @@ const createClass = async (req, res) => {
 //get all classes
 const getAllClasses = async (req, res) => {
   try {
-    const Class = await Class.findAll();
-    return res.status(200).json({ Class });
+    const allClasses = await Class.findAll();
+    return res.status(200).json({ allClasses });
   } catch (error) {
     return res.status(500).send(error.message);
   }
