@@ -8,6 +8,10 @@ router.get('/attendances', AttendanceController.getAllAttendances);
 router.get('/attendances/:id', AttendanceController.getAttendanceById);
 router.get('/attendances/date', AttendanceController.getAttendanceByDate);
 router.get('/attendances/class/:id', AttendanceController.getAttendancesByClassId);
+router.get(
+  "/attendances/student/:studentId",
+  AttendanceController.getAttendanceByStudentId
+);
 router.patch('/attendances/:id', AttendanceController.updateAttendance);
 router.delete('/attendances/:id', AttendanceController.deleteAttendance);
 

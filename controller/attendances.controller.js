@@ -93,6 +93,23 @@ const getAttendanceById = async (req, res) => {
   }
 };
 
+const getAttendanceByStudentId = async (req, res) => {
+  try {
+    const { studentId } = req.params;
+    const attendances = await Attendance.findAll({
+      where: { studentId },
+    });
+    if (attendances) {
+      return res.status(200).json({ attendances });
+    }
+    return res
+      .status(404)
+      .send("Attendance with the specified student ID does not exists");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
 const updateAttendance = async (req, res) => {
   try {
     const { id } = req.params;
@@ -132,4 +149,5 @@ module.exports = {
   deleteAttendance,
   getAttendanceByDate,
   getAttendancesByClassId,
+  getAttendanceByStudentId,
 };
