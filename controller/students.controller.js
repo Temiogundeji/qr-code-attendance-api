@@ -113,12 +113,24 @@ const loginStudent = async (req, res) => {
         status: "success",
       });
     }
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
   }
 };
 
+//Get all attendances
+const getAllStudents = async (req, res) => {
+  try {
+    const students = await Student.findAll();
+    if (students) {
+      return res.status(200).json({ students });
+    }
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
 module.exports = {
   registerStudent,
   loginStudent,
+  getAllStudents,
 };

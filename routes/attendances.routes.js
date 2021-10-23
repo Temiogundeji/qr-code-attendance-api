@@ -1,19 +1,50 @@
 const { Router } = require('express');
 const AttendanceController = require('../controller/attendances.controller');
+const { verifyToken } = require("../middlewares/Auth");
 
 const router = Router();
 
-router.post('/attendances',  AttendanceController.createAttendance);
-router.get('/attendances', AttendanceController.getAllAttendances);
-router.get('/attendances/:id', AttendanceController.getAttendanceById);
-router.get('/attendances/date', AttendanceController.getAttendanceByDate);
-router.get('/attendances/class/:id', AttendanceController.getAttendancesByClassId);
+//Create new attendance
+router.post("/attendances", verifyToken, AttendanceController.createAttendance);
+//Get all attendances
+router.get("/attendances", verifyToken, AttendanceController.getAllAttendances);
+//Get an attendance by id
+router.get(
+  "/attendances/:id",
+  verifyToken,
+  AttendanceController.getAttendanceById
+);
+//get a class by date
+router.get(
+  "/attendances/date",
+  verifyToken,
+  AttendanceController.getAttendanceByDate
+);
+//Get a class by id
+router.get(
+  "/attendances/class/:id",
+  verifyToken,
+  AttendanceController.getAttendancesByClassId
+);
+
+//Get attendances by student id
 router.get(
   "/attendances/student/:studentId",
+  verifyToken,
   AttendanceController.getAttendanceByStudentId
 );
-router.patch('/attendances/:id', AttendanceController.updateAttendance);
-router.delete('/attendances/:id', AttendanceController.deleteAttendance);
+
+//Update an attendance
+router.patch(
+  "/attendances/:id",
+  verifyToken,
+  AttendanceController.updateAttendance
+);
+router.delete(
+  "/attendances/:id",
+  verifyToken,
+  AttendanceController.deleteAttendance
+);
 
 
 module.exports =  router;
