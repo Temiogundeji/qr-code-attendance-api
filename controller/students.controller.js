@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const {
   isEmailValid,
   generateToken,
@@ -100,7 +101,8 @@ const loginStudent = async (req, res) => {
       });
     } else {
       const token = generateToken(email);
-      if (!comparePassword(stud.password, password)) {
+      // !comparePassword(password, stud.password)
+      if (!bcrypt.compareSync(password, stud.password)) {
         return res
           .status(400)
           .send({ message: "The password entered is incorrect!" });

@@ -59,7 +59,7 @@ const bcrypt = require('bcrypt');
   const comparePassword = (encodedPassword, password) => {
     const isMatched = bcrypt.compareSync(password, encodedPassword);
     return isMatched;
-  }
+  };
 
   const checkIfEntityExists = (entityArr, userEmail) => {
     entityArr = [];

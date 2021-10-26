@@ -9,7 +9,7 @@ module.exports = {
           password:
             "$2b$10$XenvLTB9GfVimikNna9jSOFivzvbswYUcsIh74JZ0yzC9T2gzLyCG",
           profilePics:
-            "cloudinary.com/temiogundeji/image/upload/v1634750305/eebcbv5lu57tywkznqyn.jpg",
+            "loudinary.com/temiogundeji/image/upload/v1634750305/eebcbv5lu57tywkznqyn.jpg",
           matricNum: "H/CS/20/1928",
           levelId: 2,
           departmentId: 1,
