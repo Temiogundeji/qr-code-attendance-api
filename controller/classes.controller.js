@@ -95,10 +95,59 @@ const deleteClass = async (req, res) => {
   }
 };
 
+// Get classes by programId
+const getClassByProgramId = async (req, res) => {
+  try {
+    const { programId } = req.params;
+    const classes = await Class.findAll({
+      where: { programId },
+    });
+    if (classes) {
+      return res.status(200).json({ classes });
+    }
+    return res.status(404).send("class with the specified ID does not exists");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+const getClassesByWeekId = () => {
+  try {
+    const { weekId } = req.params;
+    const fpiclass = await Class.findAll({
+      where: { weekId },
+    });
+    if (fpiclass) {
+      return res.status(200).json({ classes });
+    }
+    return res.status(404).send("class with the specified ID does not exists");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
+const getClassesByLevelId = () => {
+  try {
+    const { levelId } = req.params;
+    const fpiclass = await Class.findAll({
+      where: { levelId },
+    });
+    if (fpiclass) {
+      return res.status(200).json({ classes });
+    }
+    return res.status(404).send("class with the specified ID does not exists");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+}
+
 module.exports = {
   createClass,
   getAllClasses,
   getClassById,
+  getClassesByLevelId,
+  getClassByProgramId,
+  getClassesByWeekId,
   updateClass,
   deleteClass,
 };
