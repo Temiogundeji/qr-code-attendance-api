@@ -8,7 +8,7 @@ router.get('/class', ClassController.getAllClasses);
 router.get("/program/class/:programId", ClassController.getClassByProgramId);
 router.get("/level/class/:levelId", ClassController.getClassesByLevelId);
 router.get("/week/class/:weekId", ClassController.getClassesByWeekId);
-router.get("/course/class/:weekId", ClassController.getClassesByCourseId);
+router.get("/course/class/:courseId", ClassController.getClassesByCourseId);
 router.get('/class/:id', ClassController.getClassById);
 router.put('/class/:id', ClassController.updateClass);
 router.delete('/class/:id', ClassController.deleteClass);
