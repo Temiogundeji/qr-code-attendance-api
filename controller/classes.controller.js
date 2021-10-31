@@ -111,7 +111,7 @@ const getClassByProgramId = async (req, res) => {
   }
 };
 
-const getClassesByWeekId = () => {
+const getClassesByWeekId = async () => {
   try {
     const { weekId } = req.params;
     const fpiclass = await Class.findAll({
@@ -124,9 +124,9 @@ const getClassesByWeekId = () => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-}
+};
 
-const getClassesByLevelId = () => {
+const getClassesByLevelId = async () => {
   try {
     const { levelId } = req.params;
     const fpiclass = await Class.findAll({
@@ -139,7 +139,7 @@ const getClassesByLevelId = () => {
   } catch (error) {
     return res.status(500).send(error.message);
   }
-}
+};
 
 module.exports = {
   createClass,
