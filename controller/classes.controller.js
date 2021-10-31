@@ -111,7 +111,7 @@ const getClassByProgramId = async (req, res) => {
   }
 };
 
-const getClassesByWeekId = async () => {
+const getClassesByWeekId = async (req, res) => {
   try {
     const { weekId } = req.params;
     const classes = await Class.findAll({
@@ -126,11 +126,26 @@ const getClassesByWeekId = async () => {
   }
 };
 
-const getClassesByLevelId = async () => {
+const getClassesByLevelId = async (req, res) => {
   try {
     const { levelId } = req.params;
     const classes = await Class.findAll({
       where: { levelId },
+    });
+    if (classes) {
+      return res.status(200).json({ classes });
+    }
+    return res.status(404).send("class with the specified ID does not exists");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+const getClassesByCourseId = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const classes = await Class.findAll({
+      where: { courseId },
     });
     if (classes) {
       return res.status(200).json({ classes });
@@ -148,6 +163,7 @@ module.exports = {
   getClassesByLevelId,
   getClassByProgramId,
   getClassesByWeekId,
+  getClassesByCourseId,
   updateClass,
   deleteClass,
 };
