@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 const corsOptions = {
-  origin: "http://localhost:8000",
+  origin: "https://attendanceapidev.herokuapp.com",
 };
 
 app.use(express.json());
