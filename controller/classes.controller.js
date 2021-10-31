@@ -9,6 +9,7 @@ const createClass = async (req, res) => {
 
     return res.status(201).json({
       classs,
+      message: "Class has been created successfully!",
       qrImage,
     });
   } catch (error) {
