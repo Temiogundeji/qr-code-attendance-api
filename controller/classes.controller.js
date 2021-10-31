@@ -114,10 +114,10 @@ const getClassByProgramId = async (req, res) => {
 const getClassesByWeekId = async () => {
   try {
     const { weekId } = req.params;
-    const fpiclass = await Class.findAll({
+    const classes = await Class.findAll({
       where: { weekId },
     });
-    if (fpiclass) {
+    if (classes) {
       return res.status(200).json({ classes });
     }
     return res.status(404).send("class with the specified ID does not exists");
