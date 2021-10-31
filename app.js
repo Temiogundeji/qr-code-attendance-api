@@ -23,16 +23,16 @@ app.use((req, res, next) => {
   next();
 });
 
-const corsOptions = {
-  origin: "https://attendanceapidev.herokuapp.com",
-};
+// const corsOptions = {
+//   origin: "https://attendanceapidev.herokuapp.com",
+// };
 
 app.use(express.json());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: false }));
 
 // parse requests of content-type - application/json
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.get("/new", (req, res) => {
   return res.json({ message: "API for QRCode attendance system is here!" });
