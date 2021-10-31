@@ -10,7 +10,7 @@ const createAttendance = async (req, res) => {
         message: "Some values are missing!",
       });
     }
-    //Ensure no student is able to mark attendance in a day
+    //Ensure no student is able to mark attendance twice a day
     //Save attendance to the database
     const attendance = await Attendance.create(req.body);
     return res.status(201).json({
@@ -109,6 +109,10 @@ const getAttendanceByStudentId = async (req, res) => {
     return res.status(500).send(error.message);
   }
 };
+
+const getAttendanceByLecturerId = () => {};
+
+const getAttendanceByLevelId = () => {};
 
 const updateAttendance = async (req, res) => {
   try {

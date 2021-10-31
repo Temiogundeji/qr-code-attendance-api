@@ -8,6 +8,8 @@ const router = Router();
 router.post("/attendances", verifyToken, AttendanceController.createAttendance);
 //Get all attendances
 router.get("/attendances", verifyToken, AttendanceController.getAllAttendances);
+//Get all attendances by student id
+router.get("/student/attendances/:id", verifyToken, AttendanceController.getAttendanceByStudentId);
 //Get an attendance by id
 router.get(
   "/attendances/:id",
@@ -25,13 +27,6 @@ router.get(
   "/attendances/class/:id",
   verifyToken,
   AttendanceController.getAttendancesByClassId
-);
-
-//Get attendances by student id
-router.get(
-  "/attendances/student/:studentId",
-  verifyToken,
-  AttendanceController.getAttendanceByStudentId
 );
 
 //Update an attendance
