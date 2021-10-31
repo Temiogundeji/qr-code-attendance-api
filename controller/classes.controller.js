@@ -1,15 +1,21 @@
 const { Class } = require("../models");
-//create class
+const QRCode = require("qrcode");
+
+//create an attendance
 const createClass = async (req, res) => {
   try {
-    const newClass = await Class.create(req.body);
+    const classs = await Class.create(req.body);
+    const qrImage = await QRCode.toDataURL(`${classs.id}`);
+
     return res.status(201).json({
-      class: newClass,
+      classs,
+      qrImage,
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
+
 //get all classes
 const getAllClasses = async (req, res) => {
   try {

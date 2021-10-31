@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 8000;
 const logger = require("morgan");
 const app = express();
 
+
 const studentRoutes = require("./routes/students.routes");
 const lecturerRoutes = require("./routes/lecturers.routes");
 const courseRoutes = require("./routes/courses.routes");
@@ -13,8 +14,17 @@ const attendanceRoutes = require("./routes/attendances.routes");
 
 require("dotenv").config();
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 const corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:8000",
 };
 
 app.use(express.json());
