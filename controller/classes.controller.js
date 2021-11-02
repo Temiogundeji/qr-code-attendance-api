@@ -1,6 +1,9 @@
 const { Class, Course, Program, Week, Level } = require("../models");
 const QRCode = require("qrcode");
 
+
+//Add one more lecturerId column to attendance table
+
 //create an attendance
 const createClass = async (req, res) => {
   try {
@@ -14,7 +17,7 @@ const createClass = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
-  }
+  } 
 };
 
 //get all classes
