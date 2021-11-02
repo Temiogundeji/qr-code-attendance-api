@@ -43,7 +43,11 @@ const getAllClasses = async (req, res) => {
         },
       ],
     });
-    return res.status(200).json({ allClasses });
+    return res.status(200).json({
+      allClasses,
+      status: "success",
+      message: "Classes fetched successfully!",
+    });
   } catch (error) {
     return res.status(500).send(error.message);
   }
