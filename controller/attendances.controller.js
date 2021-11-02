@@ -81,7 +81,7 @@ const getAllAttendances = async (req, res) => {
       ],
     });
     if (attendances) {
-      return res.status(200).json({ attendances });
+      return res.status(200).json({ attendances, status: "success", message:"Attendances fetched successfully!" });
     }
   } catch (error) {
     return res.status(500).send(error.message);
