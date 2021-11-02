@@ -5,7 +5,7 @@ const { verifyToken } = require("../middlewares/Auth");
 const router = Router();
 
 //Create new attendance
-router.post("/attendances", verifyToken, AttendanceController.createAttendance);
+router.post("/attendances", AttendanceController.createAttendance);
 //Get all attendances
 //Add verify token
 router.get("/attendances", AttendanceController.getAllAttendances);
