@@ -1,4 +1,4 @@
-const { Class } = require("../models");
+const { Class, Course, Program, Week, Level } = require("../models");
 const QRCode = require("qrcode");
 
 //create an attendance
@@ -20,7 +20,26 @@ const createClass = async (req, res) => {
 //get all classes
 const getAllClasses = async (req, res) => {
   try {
-    const allClasses = await Class.findAll();
+    const allClasses = await Class.findAll({
+      include: [
+        {
+          model: Level,
+          attributes: ["levelName"],
+        },
+        {
+          model: Course,
+          attributes: ["courseTitle"],
+        },
+        {
+          model: Program,
+          attributes: ["programName"],
+        },
+        {
+          model: Week,
+          attributes: ["weekNumber"],
+        },
+      ],
+    });
     return res.status(200).json({ allClasses });
   } catch (error) {
     return res.status(500).send(error.message);

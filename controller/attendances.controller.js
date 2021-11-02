@@ -1,4 +1,4 @@
-const { Attendance, Student, Level } = require("../models");
+const { Attendance, Student, Course } = require("../models");
 const moment = require("moment");
 const { Op } = require("sequelize");
 const { level } = require("npmlog");
@@ -32,7 +32,10 @@ const getAttendanceByDate = async (req, res) => {
           [Op.eq]: createdAt,
         },
       },
-      include: [{ model: Student, attributes: ["username"] }],
+      include: [
+        // { model: Student, attributes: ["username"] },
+        { model: Course, attributes: ["courseTitle"] },
+      ],
     });
 
     if (!attendanceByDate) {
