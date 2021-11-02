@@ -1,6 +1,7 @@
-const { Attendance, Student } = require("../models");
+const { Attendance, Student, Level } = require("../models");
 const moment = require("moment");
 const { Op } = require("sequelize");
+const { level } = require("npmlog");
 
 const createAttendance = async (req, res) => {
   try {
@@ -31,6 +32,7 @@ const getAttendanceByDate = async (req, res) => {
           [Op.eq]: createdAt,
         },
       },
+      include: [{ model: Student, attributes: ["username"] }],
     });
 
     if (!attendanceByDate) {
@@ -67,7 +69,14 @@ const getAttendancesByClassId = async (req, res) => {
 //Get all attendances
 const getAllAttendances = async (req, res) => {
   try {
-    const attendances = await Attendance.findAll();
+    const attendances = await Attendance.findAll({
+      include: [
+        {
+          model: Student,
+          attributes: ["username", "matricNum"],
+        },
+      ],
+    });
     if (attendances) {
       return res.status(200).json({ attendances });
     }
