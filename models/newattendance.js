@@ -1,21 +1,21 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Attendance extends Model {
+  class NewAttendance extends Model {
     static associate(models) {
       // define association here
-      Attendance.belongsTo(models.Student, {
+      NewAttendance.belongsTo(models.Student, {
         foreignKey: "studentId",
         onDelete: "CASCADE",
       });
 
-      Attendance.belongsTo(models.Lecturer, {
+      NewAttendance.belongsTo(models.Lecturer, {
         foreignKey: "lecturerId",
         onDelete: "CASCADE",
       });
     }
   }
-  Attendance.init(
+  NewAttendance.init(
     {
       studentId: DataTypes.INTEGER,
       classId: DataTypes.INTEGER,
@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Attendance",
+      modelName: "NewAttendance",
     }
   );
-  return Attendance;
+  return NewAttendance;
 };

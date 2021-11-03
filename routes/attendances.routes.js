@@ -6,6 +6,8 @@ const router = Router();
 
 //Create new attendance
 router.post("/attendances", AttendanceController.createAttendance);
+//Get attendances by lectuererId
+router.get("/lecturer/attendances/:lecturerId", AttendanceController.getAttendancesByLecturerId);
 //Get all attendances
 //Add verify token
 router.get("/attendances", AttendanceController.getAllAttendances);

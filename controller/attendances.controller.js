@@ -1,20 +1,21 @@
-const { Attendance, Student, Course } = require("../models");
+const { NewAttendance, Student, Course } = require("../models");
 const moment = require("moment");
 const { Op } = require("sequelize");
 const { level } = require("npmlog");
 
 const createAttendance = async (req, res) => {
   try {
-    const { studentId, classId } = req.body;
-    if (!studentId || !classId) {
+    const { studentId, classId, lecturerId } = req.body;
+    if (!studentId || !classId || !lecturerId) {
       return res.status(400).send({
         message: "Some values are missing!",
       });
     }
     //Ensure no student is able to mark attendance twice a day
     //Save attendance to the database
-    const attendance = await Attendance.create(req.body);
+    const attendance = await NewAttendance.create(req.body);
     return res.status(201).json({
+      status: "success",
       attendance,
     });
   } catch (e) {
@@ -26,7 +27,7 @@ const createAttendance = async (req, res) => {
 const getAttendanceByDate = async (req, res) => {
   try {
     const { createdAt } = req.params;
-    const attendanceByDate = await Attendance.findAll({
+    const attendanceByDate = await NewAttendance.findAll({
       where: {
         createdAt: {
           [Op.eq]: createdAt,
@@ -55,7 +56,7 @@ const getAttendanceByDate = async (req, res) => {
 const getAttendancesByClassId = async (req, res) => {
   const { classId } = req.body;
   try {
-    const attendances = await Attendance.findAll({
+    const attendances = await NewAttendance.findAll({
       where: { classId },
     });
     if (attendances) {
@@ -69,10 +70,28 @@ const getAttendancesByClassId = async (req, res) => {
   }
 };
 
+//Get Attendance by lecturerId
+const getAttendancesByLecturerId = async (req, res) => {
+  const { lecturerId } = req.params;
+  try {
+    const attendances = await NewAttendance.findAll({
+      where: { lecturerId },
+    });
+    if (attendances) {
+      return res.status(200).json({ status: "success", attendances });
+    }
+    return res
+      .status(404)
+      .send("Attendance with the specified ID does not exists");
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
 //Get all attendances
 const getAllAttendances = async (req, res) => {
   try {
-    const attendances = await Attendance.findAll({
+    const attendances = await NewAttendance.findAll({
       include: [
         {
           model: Student,
@@ -81,7 +100,11 @@ const getAllAttendances = async (req, res) => {
       ],
     });
     if (attendances) {
-      return res.status(200).json({ attendances, status: "success", message:"Attendances fetched successfully!" });
+      return res.status(200).json({
+        attendances,
+        status: "success",
+        message: "Attendances fetched successfully!",
+      });
     }
   } catch (error) {
     return res.status(500).send(error.message);
@@ -91,7 +114,7 @@ const getAllAttendances = async (req, res) => {
 const getAttendanceById = async (req, res) => {
   try {
     const { id } = req.params;
-    const attendance = await Attendance.findOne({
+    const attendance = await NewAttendance.findOne({
       where: { id: id },
     });
     if (attendance) {
@@ -108,7 +131,7 @@ const getAttendanceById = async (req, res) => {
 const getAttendanceByStudentId = async (req, res) => {
   try {
     const { studentId } = req.params;
-    const attendances = await Attendance.findAll({
+    const attendances = await NewAttendance.findAll({
       where: { studentId },
     });
     if (attendances) {
@@ -121,8 +144,6 @@ const getAttendanceByStudentId = async (req, res) => {
     return res.status(500).send(error.message);
   }
 };
-
-const getAttendanceByLecturerId = () => {};
 
 const getAttendanceByLevelId = () => {};
 
@@ -166,4 +187,5 @@ module.exports = {
   getAttendanceByDate,
   getAttendancesByClassId,
   getAttendanceByStudentId,
+  getAttendancesByLecturerId,
 };
