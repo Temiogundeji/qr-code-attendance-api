@@ -11,6 +11,7 @@ const courseRoutes = require("./routes/courses.routes");
 const classRoutes = require("./routes/classes.routes");
 const departmentRoutes = require("./routes/departments.routes");
 const attendanceRoutes = require("./routes/attendances.routes");
+const levelRoutes = require("./routes/levels.routes");
 
 require("dotenv").config();
 
@@ -44,6 +45,7 @@ app.use("/api/v1", courseRoutes);
 app.use("/api/v1", classRoutes);
 app.use("/api/v1", attendanceRoutes);
 app.use("/api/v1", departmentRoutes);
+app.use("/api/v1", levelRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
