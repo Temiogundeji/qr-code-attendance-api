@@ -76,6 +76,12 @@ const getAttendancesByLecturerId = async (req, res) => {
   try {
     const attendances = await NewAttendance.findAll({
       where: { lecturerId },
+      include: [
+        {
+          model: Student,
+          attributes: ["username", "matricNum"],
+        },
+      ],
     });
     if (attendances) {
       return res.status(200).json({ status: "success", attendances });
