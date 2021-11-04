@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "departmentId",
         onDelete: "CASCADE",
       });
+      Lecturer.hasMany(models.Class, {
+        foreignKey: "lecturerId",
+        onDelete: "CASCADE",
+      });
     }
   }
   Lecturer.init(
