@@ -80,7 +80,7 @@ const getClassesByLecturerId = async (req, res) => {
       ],
     });
     if (fpiclass) {
-      return res.status(200).json({ fpiclass });
+      return res.status(200).json({ fpiclass, status: "success" });
     }
     return res.status(404).send("class with the specified ID does not exists");
   } catch (error) {
