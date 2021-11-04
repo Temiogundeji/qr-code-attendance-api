@@ -22,7 +22,7 @@ const registerLecturer = async (req, res) => {
       departmentId,
       email,
       password: hashedPassword,
-      profilePics: req.file.path,
+      // profilePics: req.file.path,
     };
 
     if (!isEmailValid(email)) {
