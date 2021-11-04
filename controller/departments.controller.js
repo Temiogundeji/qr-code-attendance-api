@@ -22,7 +22,7 @@ const createDepartment = async (req, res) => {
 const getAllDepartments = async (req, res) => {
     try {
         const departments = await Department.findAll();
-        return res.status(200).json({ departments });
+        return res.status(200).json({ departments, status: "success" });
     } catch (error) {
         return res.status(500).send(error.message);
     }
