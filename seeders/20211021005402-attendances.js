@@ -4,14 +4,14 @@ module.exports = {
       "NewAttendances",
       [
         {
-          studentId: 4,
+          studentId: 8,
           classId: 1,
           lecturerId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          studentId: 5,
+          studentId: 7,
           classId: 1,
           lecturerId: 3,
           createdAt: new Date(),
