@@ -5,6 +5,10 @@ const router = Router();
 
 router.post('/class', ClassController.createClass);
 router.get('/class', ClassController.getAllClasses);
+router.get(
+  "/lecturer/classes/:lecturerId",
+  ClassController.getClassesByLecturerId
+);
 router.get("/program/class/:programId", ClassController.getClassByProgramId);
 router.get("/level/class/:levelId", ClassController.getClassesByLevelId);
 router.get("/week/class/:weekId", ClassController.getClassesByWeekId);
