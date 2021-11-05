@@ -141,7 +141,7 @@ const getAttendanceByStudentId = async (req, res) => {
       where: { studentId },
     });
     if (attendances) {
-      return res.status(200).json({ attendances });
+      return res.status(200).json({ attendances, status: "success" });
     }
     return res
       .status(404)

@@ -12,7 +12,7 @@ router.get("/lecturer/attendances/:lecturerId", AttendanceController.getAttendan
 //Add verify token
 router.get("/attendances", AttendanceController.getAllAttendances);
 //Get all attendances by student id
-router.get("/student/attendances/:id", verifyToken, AttendanceController.getAttendanceByStudentId);
+// router.get("/student/attendances/:id", verifyToken, AttendanceController.getAttendanceByStudentId);
 //Get an attendance by id
 router.get(
   "/attendances/:id",
@@ -44,5 +44,9 @@ router.delete(
   AttendanceController.deleteAttendance
 );
 
+router.get(
+  "/student/attendances/:studentId",
+  AttendanceController.getAttendanceByStudentId
+);
 
 module.exports =  router;
