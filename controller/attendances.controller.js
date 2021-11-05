@@ -1,7 +1,6 @@
-const { NewAttendance, Student, Course } = require("../models");
+const { NewAttendance, Student, Class, Week, Course } = require("../models");
 const moment = require("moment");
 const { Op } = require("sequelize");
-const { level } = require("npmlog");
 
 const createAttendance = async (req, res) => {
   try {
@@ -81,6 +80,19 @@ const getAttendancesByLecturerId = async (req, res) => {
           model: Student,
           attributes: ["username", "matricNum"],
         },
+        {
+          model: Class,
+          include: [
+            {
+              model: Week,
+              attributes: ["weekNumber"]
+            },
+            {
+              model: Course,
+              attributes: ["courseTitle"]
+            },
+          ],
+        },
       ],
     });
     if (attendances) {
@@ -139,6 +151,19 @@ const getAttendanceByStudentId = async (req, res) => {
     const { studentId } = req.params;
     const attendances = await NewAttendance.findAll({
       where: { studentId },
+      include: [
+        {
+          model: Class,
+          include: [
+            {
+              model: Week,
+            },
+            {
+              model: Course,
+            },
+          ],
+        },
+      ],
     });
     if (attendances) {
       return res.status(200).json({ attendances, status: "success" });

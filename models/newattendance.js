@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "lecturerId",
         onDelete: "CASCADE",
       });
+      NewAttendance.belongsTo(models.Class, {
+        foreignKey: "classId",
+        onDelete: "CASCADE",
+      });
     }
   }
   NewAttendance.init(
